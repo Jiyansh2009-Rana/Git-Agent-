@@ -66,3 +66,28 @@ class UserInfo(BaseModel):
 class AuthResponse(BaseModel):
     message: str
     user: UserInfo
+
+
+class ProfileUpdateRequest(BaseModel):
+    username: str = Field(..., min_length=4, max_length=50)
+
+
+class DisableUserRequest(BaseModel):
+    reason: str = Field(
+        default="Account disabled by administrator.",
+        min_length=3,
+        max_length=500,
+    )
+
+
+class AdminDeleteRepoRequest(BaseModel):
+    reason: str = Field(..., min_length=5, max_length=500)
+
+
+class PaginationMeta(BaseModel):
+    page: int
+    limit: int
+    total: int
+    total_pages: int
+    has_next: bool
+    has_prev: bool
